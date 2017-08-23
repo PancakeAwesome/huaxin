@@ -1,0 +1,97 @@
+<view class="container" wx:if='{{isShow}}'>
+  <view class='main2'>
+    <view class='left' bindtap="turnToNextPage" data-type='real-act-list'>分类</view>
+    <view class='middle'>线下活动</view>
+    <view class='right'>
+      <image src="https://www.huaxinapp.xyz/static/wxss/home_icon_search.png" bindtap="turnToNextPage" data-type='search'></image>
+    </view>
+  </view>
+  
+  <view class="content" style="background-color: #EAEAEA;">
+      <view class="tabbar" style="background: #fff;font-size: .8rem;">
+
+          <view class="section selected active" data-type='0' bindtap='switchTab' wx:if='{{acTypeShow == 0}}'>最新活动</view>
+          <view class="section  " data-type='0' bindtap='switchTab' wx:else>最新活动</view>
+
+          <view class="section active selected" data-type='1' bindtap='switchTab' wx:if='{{acTypeShow == 1}}'>沙龙类</view>
+          <view class="section " data-type='1' bindtap='switchTab' wx:else>沙龙类</view>
+
+          <view class="section active selected" data-type='2' bindtap='switchTab' wx:if='{{acTypeShow == 2}}'>活动类</view>
+          <view class="section " data-type='2' bindtap='switchTab' wx:else>活动类</view>
+
+          <view class="section active selected" data-type='3' bindtap='switchTab' wx:if='{{acTypeShow == 3}}'>体验类</view>
+          <view class="section " data-type='3' bindtap='switchTab' wx:else>体验类</view>
+
+          <view class="section active selected" data-type='4' bindtap='switchTab' wx:if='{{acTypeShow == 4}}'>课程类</view>
+          <view class="section " data-type='4' bindtap='switchTab' wx:else>课程类</view>
+      </view>
+      
+      <view class="actions">
+        <block wx:for="{{acs}}">
+          <view wx:if='{{item.titleGraph != null && item.titleGraph != ""}}' class="action" bindtap="turnToAct" id='{{item.uuid}}' style='background: url({{item.titleGraph}}) no-repeat;background-size:cover;' >
+              <!-- mask -->
+            <view class="mask-ui"></view>
+            <view class='action_text'>
+                <view class="action_first">
+                    <view class="action_title">{{item.name}}</view>
+                    <view class="action_time" style="font-size:.7rem">
+                        <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_time.png" style=""></image>
+                        <text>{{item.startTimeFm}}</text>
+                        <text>/{{item.endTimeFm}}</text>
+                    </view>
+                    <view class="action_location" style="font-size: .7rem">
+                        <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_location.png" style=""></image>
+                        <text>{{item.address}}</text>
+                    </view>
+                  </view>
+                  <view class="action_second" style="font-size: .7rem">
+                      <text>可获得{{item.integral}}积分</text>
+                  </view>
+              </view>
+            </view>
+            
+
+          <view class="action" bindtap="turnToAct" id='{{item.uuid}}' style='background: url("https://www.huaxinapp.xyz/static/wxss/pic.png") no-repeat;background-size:cover;' wx:else>
+            <!-- mask -->
+            <view class="mask-ui"></view>
+            <view>
+              <view class="action_first">
+                  <view class="action_title">{{item.name}}</view>
+                  <view class="action_time" style="font-size:.7rem">
+                      <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_time.png" style=""></image>
+                      <text>{{item.startTimeFm}}</text>
+                  </view>
+                  <view class="action_location" style="font-size: .7rem">
+                      <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_location.png" style=""></image>
+                      <text>{{item.address}}</text>
+                  </view>
+                </view>
+                <view class="action_second" style="font-size: .7rem">
+                    <text>可获得{{item.integral}}积分</text>
+                </view>
+            </view>
+            
+          </view>
+
+        </block>  
+      </view>    
+  </view>
+
+  <!-- footer -->
+  <view class="menu">
+      <view class="home " bindtap="turnToNextPage_redirect" data-type='index'>
+      <image src="https://www.huaxinapp.xyz/static/wxss/tab_icon_home_default.png"></image> <text>首页</text>
+      </view>
+          
+      <view class="module active" bindtap="turnToNextPage_redirect" data-type='find'>
+      <image src="https://www.huaxinapp.xyz/static/wxss/tab_icon_discove_selected.png"></image> <text>发现</text>
+      </view>
+          
+      <view class="mine" bindtap="turnToMine" data-type='mine'>
+      <image src="https://www.huaxinapp.xyz/static/wxss/tab_icon_user_default.png"></image> <text>我的</text>
+      </view>
+              
+      <view class="cf"></view>
+  </view>
+        
+</view>

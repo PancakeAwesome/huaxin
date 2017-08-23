@@ -1,0 +1,144 @@
+<view class="container" wx:if='{{isShow}}'>
+  <view class='main2'>
+    <view class="left" bindtap='backToPage' style='margin:0;'>
+      <image src="https://www.huaxinapp.xyz/static/wxss/icon_back.png" class='back_img'></image>
+    </view>
+    <view class='middle'>我的积分</view>
+    <view class='right'>
+      <image src="https://www.huaxinapp.xyz/static/wxss/hint.png" bindtap="hint_pop" style='margin:0;'></image>
+    </view>
+  </view>  
+
+  <view class="">
+    <view class='integral_box'>
+      <view class="big_num">{{integral}}</view>
+    </view>
+    
+    <view class='medal_text'>我的学分</view>
+
+    <view class='medal_box'>
+      <view class='medal1'>
+        <image src='https://www.huaxinapp.xyz/static/wxss/medal1_disabled.png' wx:if='{{!medal1_goal}}' bindtap='converse_medal' data-type='hp_regular'></image>
+        <image src='https://www.huaxinapp.xyz/static/wxss/medal1_active.png' bindtap='converse_medal' data-type='hp_active' wx:else></image>
+      </view>
+      
+      <view class='medal2'>
+        <image src='https://www.huaxinapp.xyz/static/wxss/medal2_disabled.png' wx:if='{{!medal2_goal}}' bindtap='converse_medal' data-type='lp_regular'></image>
+        <image src='https://www.huaxinapp.xyz/static/wxss/medal2_active.png' bindtap='converse_medal' data-type='lp_active' wx:else></image>
+      </view>
+    </view>
+
+
+    <view class="integral_detail">
+        <view style='margin-left:10px;padding:10px;font-size: .8rem;'>积分详情</view>
+        <view class='bg_white'>
+          <view class="tab" style='padding:20rpx;'>
+              <view>名称</view>
+              <view>类别</view>
+              <view>日期</view>
+              <view>积分</view>
+          </view>
+          
+          <view class="list">
+            <block wx:for='{{its}}'>
+              <view class="list_item">
+                  <view>{{item.acName}}</view>
+                  <!-- <view class="tag_text" wx:if='{{item.quType == 1}}'>人际交往</view>
+                  <view class="tag_text" wx:elif='{{item.quType == 2}}'>个人成长</view>
+                  <view class="tag_text" wx:elif='{{item.quType == 3}}'>恋爱情感</view>
+                  <view class="tag_text" wx:elif='{{item.quType == 4}}'>家庭关系</view>
+                  <view class="tag_text" wx:elif='{{item.quType == 5}}'>情绪压力</view>
+                  <view class="tag_text" wx:elif='{{item.quType == 6}}'>职业规划</view>
+                  <view class="tag_text" wx:elif='{{item.quType == 7}}'>性心理</view>
+                  <view class="tag_text" wx:else>其他</view> -->
+                  <view class="tag_text">{{item.acTypeCn}}</view>
+                  <view>{{item.finishedTimeFn}}</view>
+                  <view class="integral">
+                      <view>
+                        <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/score_icon_points.png" alt=""></image>
+                      </view>
+                      <view>{{item.acIntegral}}</view>
+                  </view>
+              </view>
+            </block>
+
+          </view>
+        </view>
+      </view>
+  </view>
+
+  <view wx:if='{{isBomb}}'>
+      <!-- 弹框底层蒙版 -->
+      <view class="mask-ui" disabled="{{disabled}}" bindtap='mask_cancle'></view>
+
+      <!-- 弹框1-->
+      <view wx:if='{{isPop1}}'>
+        <view class="bomb-box" style='text-align: initial;'>
+          <view class='bomb_cancle' bindtap='hint_cancle'>
+            <image src='https://www.huaxinapp.xyz/static/wxss/cancle.png'></image>
+          </view>
+          <view class='bomb_title'>注意事项：</view>
+          <view>  1.每100积分中至少包含3个及以上的不同类别线下活动；</view>
+          <view>  2.“百分计划”（100积分及以上）需包含一次XY老师的心理沙龙及心理测评活动的体验；</view>
+          <view>  3.“练级计划”（200积分及以上）需包含一门以上心理学课程的学习；</view>
+          <view>  4.以上两种计划的学分兑换之前都需填写反馈问卷，满足条件自动兑换创新学分;</view>
+          <view>5.2017年9月1日以后参与练级计划，需参加一期自我成长训练营，才能兑换学分。</view>
+        </view>
+      </view>
+
+      <!-- 弹框2-->
+      <view wx:if='{{isPop2}}'>
+        <view class="bomb-box">
+          <view class='bomb_cancle' bindtap='pop2_cancle'>
+            <image src='https://www.huaxinapp.xyz/static/wxss/cancle.png'></image>
+          </view>
+
+          <view class='bomb_imgbox' style='padding:0;' wx:if='{{!medal1_goal}}'>
+            <image src='https://www.huaxinapp.xyz/static/wxss/medal1_disabled.png'></image>
+          </view>
+          <view class='bomb_imgbox' style='padding:0;' wx:else>
+            <image src='https://www.huaxinapp.xyz/static/wxss/medal1_active.png'></image>
+          </view>
+
+          <view style='color: #072742;font-size: 1.3rem'>百分计划</view>
+          <!-- <view style='padding-bottom: 0;'>100积分及以上</view> -->
+          <view style='padding-top: 0;'>包含至少3个不同类别线下活动；且需包含一次XY老师的心理沙龙及心理测评活动；兑换前填写反馈问卷，满足条件自动兑换创新学分</view>
+          <button type='button' class="disable-btn" bindtap='' wx:if='{{unconversable1}}'>不可兑换</button>
+          <button type='button' class="regular-btn" bindtap='questionnaire' wx:if='{{conversable1}}'>问卷反馈</button>
+          <button type='button' class="disable-btn" bindtap='' wx:if='{{submited1}}'>已提交</button>
+          <!-- <input type="text" disabled="true" value="请复制以下链接在浏览器中打开~" style="background:red;width:100%;height:100px;color: #fff" />
+          <input type="text" value="{{questionnaire}}" style="background:red;width:100%;height:100px;" /> -->
+        </view>
+      </view>
+
+      <!-- 弹框3-->
+      <view wx:if='{{isPop3}}'>
+        <view class="bomb-box">
+          <view class='bomb_cancle' bindtap='pop3_cancle'>
+            <image src='https://www.huaxinapp.xyz/static/wxss/cancle.png'></image>
+          </view>
+
+          <view class='bomb_imgbox' style='padding:0;' wx:if='{{!medal2_goal}}'>
+            <image src='https://www.huaxinapp.xyz/static/wxss/medal2_disabled.png'></image>
+          </view>
+          <view class='bomb_imgbox' style='padding:0;' wx:else>
+            <image src='https://www.huaxinapp.xyz/static/wxss/medal_active.png'></image>
+          </view>
+
+          <view style='color: #072742;font-size: 1.3rem'>练级计划</view>
+          <!-- <view style='padding-bottom: 0;'>200积分及以上</view> -->
+          <view style='padding-top: 0;'>包含至少3个不同类别线下活动；包含至少一门心理学课程；兑换前填写反馈问卷，满足条件自动兑换创新学分（2017年9月1日以后参与该计划，需参加一期自我成长训练营）</view>
+          <button type='button' class="disable-btn" bindtap='' wx:if='{{unconversable2}}'>不可兑换</button>
+          <button type='button' class="regular-btn" bindtap='questionnaire1' wx:if='{{conversable2}}'>问卷反馈</button>
+          <button type='button' class="disable-btn" bindtap='' wx:if='{{submited2}}'>已提交</button>
+        </view>
+      </view>
+
+  </view>
+  <!-- 警告窗口 -->
+  <block wx:if='{{isShowTip}}'>
+    <view class='text-alert'>
+      {{alertText}}
+    </view>
+  </block> 
+</view>

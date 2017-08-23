@@ -1,0 +1,48 @@
+<view class="container" wx:if='{{isShow}}'>
+
+    <view class="main" style="">
+        <view class="back"  bindtap='backToPage' >
+          <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_back.png"></image>
+        </view>
+        <view class="title">我的活动</view>
+    </view>
+    
+    <view class="content" style="height: inherit;">
+        <view class="content_tab">
+            <view class="section selected active" data-type='0' bindtap='switchTab' wx:if='{{acTypeShow == 0}}'>已报名</view>
+            <view class="section  " data-type='0' bindtap='switchTab' wx:else>已报名</view>
+
+            <view class="section active selected" data-type='1' bindtap='switchTab' wx:if='{{acTypeShow == 1}}'>已签到</view>
+            <view class="section " data-type='1' bindtap='switchTab' wx:else>已签到</view>
+
+            <view class="section active selected" data-type='2' bindtap='switchTab' wx:if='{{acTypeShow == 2}}'>已完成</view>
+            <view class="section " data-type='2' bindtap='switchTab' wx:else>已完成</view>
+
+        </view>
+        
+        <view class='default-img' wx:if='{{isDfShow}}'>
+          <text>已经全部加载完毕</text>
+        </view>
+
+        <block wx:for='{{acs}}' wx:if='{{isShow2 && !isDfShow}}'>
+          <view class="search_result" data-type='{{item.uuid}}' bindtap='turnToAc'>
+              <view>
+                  <view>{{item.name}}</view>
+                  <view class="result_time">{{item.startTimeFm}}</view>
+              </view>
+              <view style='display: flex;align-items: center;'>
+                <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_label.png" alt="" style='width:34.3rpx;height:34.3rpx'></image>
+                <text style='font-size: .7rem'>{{item.acTypeCn}}</text>
+              </view>
+          </view>
+        </block>
+
+    </view>
+
+    <!-- 警告窗口 -->
+    <block wx:if='{{isShowTip}}'>
+      <view class='text-alert'>
+        {{alertText}}
+      </view>
+    </block>    
+</view>

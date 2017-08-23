@@ -1,0 +1,41 @@
+@import '../../lib/css/public.wxss';
+.slide{
+    display: flex;
+}
+.slide_box{
+    border: 1px #43B9DA solid;
+    border-radius: 5px;
+    display: flex;
+    width: 60px;
+    height: 20px;
+    background: #43B9DA;
+    justify-content: flex-end;
+}
+.slide .white{
+    width: 30px;
+    background: #fff;
+}
+.slide_hint{
+    color: grey;
+    margin-left: 10px;
+}
+.question_kind{
+    border-bottom: 1px grey solid;
+}
+.question_detail{
+    padding: 10px 10px;
+}
+.text_number{
+  color: #A0A0A0;
+  text-align: right;
+  margin-right: 10rpx
+}
+.text_number > text{
+  font-size: 1.1rem
+}
+.picker{
+  color:#6b6b6b;
+}
+.question{
+  color: #cacaca
+}

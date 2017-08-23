@@ -1,0 +1,69 @@
+@import "../../lib/css/public.wxss";
+/*title navigate_bar*/
+.right > image{
+  width: 1rem;
+  height: 1rem;
+}
+.action{
+  background-size: cover;
+  /*margin-bottom:20rpx;*/
+  color: #fff;
+  height: 350rpx;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
+  border-radius:5px;
+  /*margin:0 5px 20rpx 5px;*/
+  margin:0 10px 30rpx 10px;
+  position: relative;
+}
+.action .mask-ui{
+  position: absolute;
+  background:rgba(07, 07, 07, 0.3);
+  border-radius:5px;
+}
+.action > .action_text{
+  z-index:5;
+}
+.action_title{
+  margin-bottom:20rpx;
+  font-size:1.2rem;
+}
+.action .action_first{
+    display: flex;
+    flex-direction: column;
+    padding:5rpx 20rpx;
+}
+.action .action_first image{
+    /*width:.8rem;
+    height:.8rem;*/
+    margin-right:10rpx;
+}
+.action .action_second{
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 10px;
+}
+.action_second text{
+  background: #42B8DB;
+  color: #fff;
+  padding: 2px;
+  border-radius:5px
+}
+.action_first .action_time{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10rpx
+}
+.action_first .action_location{
+    display: flex;
+    align-items: center;
+}
+.action_location > image{
+  width: .8rem;
+  height: 1rem;
+}
+.action_time > image{
+  width: .8rem;
+  height: .8rem;
+}

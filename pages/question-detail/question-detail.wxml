@@ -1,0 +1,135 @@
+<view class="container" wx:if='{{isShow}}'>
+
+    <view class="main" style="">
+      <view class="back" bindtap='backToPage'>
+        <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_back.png" alt="" style=""></image>
+      </view>
+      <view class="title">问题详情</view>
+    </view>
+
+    <view>
+        <view style="font-size: .9rem;background: #fff;margin-top:10px">
+          <view style="padding: 15px;display: flex;align-items: center;">
+            <image class='user-img' src="{{qus[0].quUserPic}}"  style="width:70rpx;height:70rpx;" wx:if='{{qus[0].quUserPic != null && qus[0].quUserPic != ""}}'></image>
+            <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/img_unknown user.png"  style="width:70rpx;height:70rpx;" wx:else></image>
+            <text style="margin-left:.5rem" wx:if='{{qus[0].quUserNickname == null}}'>匿名用户</text>
+            <text style="margin-left:.5rem" wx:else>{{qus[0].quUserNickname}}</text>
+          </view>
+
+          <view style="padding: 0 15px;font-size:.7rem">
+              <text class='text'>{{qus[0].quContent}}</text>
+          </view>
+
+          <view style="background: #fff;padding: 15px;display: flex;font-size: .7rem;justify-content: space-between;align-items: center;">
+              <view class="question_detail">
+                  <view class="question_time" style='color: #bababb;'>{{quCreatedTimeFn}}前</view>
+              </view>
+
+              <view style='display: flex;align-items:center;'>
+                <view style="height: 20px;width: 20px;margin-right: 10rpx">
+                  <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/post-big1_08.jpg" style='width:100%;height:100%' bindtap='liking' data-type='{{qus[0].quId}}' wx:if='{{!qus[0].voted}}'></image>
+                  <image claqss='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_like.png" style='width:100%;height:100%' bindtap='unLiking' data-type='{{qus[0].quId}}' wx:else></image>
+                </view>
+                <text style="color: #939393;">{{qus[0].quVoteNum}}人有同感</text>
+              </view>
+              
+          </view>
+
+        </view>
+        
+        <view wx:if='{{qus[0].anContent != null || qus[0].anVoice != null}}'>
+          <view style="background: #fff;border-top:1px #F9F9FA solid;padding: 15px 0 0 15px;display: flex;align-items: center;" >
+            <image class='user-img' src="{{qus[0].anUserPic}}"  style="width:70rpx;height:70rpx;" wx:if='{{qus[0].anUserPic != null && qus[0].anUserPic != ""}}'></image>
+            <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/img_unknown user.png"  style="width:70rpx;height:70rpx;" wx:else></image>
+
+            <text style='margin-left:.5rem;font-size:.8rem;' wx:if='{{qus[0].anUserNickname != null && qus[0].anUserNickname != ""}}'>{{qus[0].anUserNickname}}</text>
+            <text style='margin-left:.5rem;font-size:.8rem;' wx:else>匿名用户</text>
+            
+            <text style='font-size: .7rem;color: #B5B5B5' wx:if='{{qus[0].anUserRemark != null && qus[0].anUserRemark != ""}}'>|{{qus[0].anUserRemark}}</text>
+
+          </view>
+
+          <view style="background: #fff;padding: 10px">
+              <view class="item_third section" wx:if='{{qus[0].anVoice != null && qus[0].anVoice != ""}}'>
+
+                <view class="voice-box-rp voice-box voicearr-104" bindtap='voiceEvent' data-type='{{qus[0].anVoice}}' data-anvoice='0' data-anid='{{qus[0].anId}}'>                
+                    <view class="voice-box-pause"></view>
+                    <view class='voice_duration'>{{qus[0].anVoiceDurationFm}}</view>                               
+                </view>
+                <view class="rp-voice-time rel" style="float:left;font-size: .6rem;margin-left: 1rem">{{qus[0].anVoiceListened}}人听过</view>
+                  <view class="cf"></view>
+              </view>
+
+              <view class='office_reply' wx:if='{{qus[0].anContent != null && qus[0].anContent != ""}}'>
+                  <text class='text'>{{qus[0].anContent}}</text>
+              </view>
+          </view>
+        </view>
+        
+        <view id='reply'>
+
+          <view id='reply_title'>
+            <view class='reply_text'>回复</view>
+            <view class='reply_number'>{{replies.length}}</view>
+          </view>
+
+          <view id='reply_items'>
+            <view wx:if='{{replies.length}}'>
+              <block wx:for='{{replies}}'>
+                <view id='reply_item'>
+                  <view class='reply_top'>
+                    <view class='user_pic'>
+                      <image src='{{item.userPic}}' wx:if='{{item.userPic != null}}'></image>
+                      <image src="https://www.huaxinapp.xyz/static/wxss/img_unknown user.png" wx:else></image>
+                    </view>
+
+                    <view class='reply_top_mid'>
+                      <view class='user_name'>{{item.userNickName}}</view>
+                      <view class='reply_createdTime'>{{item.createdTimeFn}}前</view>
+                    </view>
+
+                    <!-- <view class="item_fourth section content_hint_voice" style='' >
+                      <text>{{item.quVoteNum}}</text>
+
+                      <view>
+                        <image src='https://www.huaxinapp.xyz/static/wxss/post-big1_08.jpg' class='user-img' bindtap='liking' wx:if='{{!item.voted}}' data-type='{{item.quId}}' data-status='{{index}}' style='width: 40rpx;height: 40rpx'></image>
+                        <image src='https://www.huaxinapp.xyz/static/wxss/icon_like.png' class='user-img' bindtap='unLiking' data-type='{{item.quId}}' data-status='{{index}}' style='width: 40rpx;height: 40rpx' wx:else></image>
+                      </view>
+                    </view> -->
+                  </view>
+                  
+                  <view class='reply_content'>{{item.content}}</view>
+                </view>
+              </block>
+            </view>
+
+            <view style='min-height: 800rpx;' wx:else>
+              <view class='default_text'>暂时没有评论，赶紧来抢沙发吧！</view>
+              <view class='default_imgBox'>
+                <image class='default_img' src='https://www.huaxinapp.xyz/static/wxss/default_sofa.png' />
+              </view>
+            </view>
+
+          </view>
+        </view>
+        
+        <!-- reply input -->
+        <view class='reply_input'>
+          <view class='remark_pic'>
+            <image src='https://www.huaxinapp.xyz/static/wxss/remark.png' />
+          </view>
+
+          <view class='remark_input'>
+            <input type="text" value="{{remark}}" bindblur='blur_ip' bindinput='remark_ip' placeholder="我来评论..." placeholder-style='color:#E1E0E0' />
+          </view>
+
+          <view class='remark_bt' bindtap='submit_reply'>发送</view>
+        </view>
+    </view>
+    <!-- 警告窗口 -->
+    <block wx:if='{{isShowTip}}'>
+      <view class='text-alert'>
+        {{alertText}}
+      </view>
+    </block>
+</view>

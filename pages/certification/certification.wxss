@@ -1,0 +1,43 @@
+@import "../../lib/css/public.wxss";
+.container{
+    /*background: url(../../../images/132.jpg) no-repeat!important;
+    background-size: cover!important;*/
+}
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /*margin-top: 100px;*/
+    background: none!important;
+}
+.content > .section{
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10rpx;
+    background: #fff;
+    padding: 50rpx 30rpx;
+}
+.section > .section_child{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.section > .ip_tip{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #ff1111;
+  font-size: .6rem
+}
+.section input{
+  margin-left:40rpx;
+  flex:1;
+}
+/*.section input{
+    width: 100%;
+    border: #fff 1px solid;
+}*/

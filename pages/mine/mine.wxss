@@ -1,0 +1,53 @@
+@import '../../lib/css/public.wxss';
+.post_big{
+    height: 200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.portrait_box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.list{
+    background: #fff;
+    margin-top: 10px;
+}
+.list image{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.list > view{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    font-size:.9rem;
+}
+.item_title{
+    flex: 1;
+    margin-left: 10px;
+}
+.my_integral{
+    display: flex;
+}
+.integral_more{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.name{
+  color: #fff;
+  margin-top:30rpx;
+}
+.backImg{
+  width:.6rem;
+  height:.9rem;
+}
+.my_act{
+  border-bottom: 1px #EFEFEF solid;
+}

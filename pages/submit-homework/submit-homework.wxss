@@ -1,0 +1,17 @@
+page{
+  background:#EAEAEA;
+}
+.content_title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.content_item{
+    font-size: .8rem;
+    padding: 10px;
+}
+.ip{
+  height: 100px;
+  max-height: 300px;
+}

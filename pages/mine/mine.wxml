@@ -1,0 +1,105 @@
+<view class="container" wx:if='{{isShow}}'>
+    
+    <view class="post_big" style='background: url(https://www.huaxinapp.xyz/static/wxss/pic.png) no-repeat;background-size: cover;'>
+        <view class="portrait_box">
+          <view class="portrait circle" style='background: url({{userPic}}) no-repeat;background-size: cover;' wx:if='{{userPic != null}}' ></view>
+          <view class="portrait circle" style='background: url(https://www.huaxinapp.xyz/static/wxss/0.jpeg) no-repeat;background-size: cover;' wx:else></view>
+          <view class="name">{{userName}}</view>
+        </view>
+    </view>
+
+    <view class="list">
+        <view class="my_act" bindtap="turnToNextPage" data-type='my-act'>
+            <view>
+            <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/user_btn_activity.png" alt=""></image>
+            </view>
+            <view class="item_title">我的活动</view>
+            <view>
+            <image class='backImg' style='width:.6rem;height:.9rem;' src="https://www.huaxinapp.xyz/static/wxss/icon_more.png" alt=""></image>
+            </view>
+        </view>
+
+        <view class="my_act" bindtap="turnToNextPage" data-type='my-question'>
+            <view>
+            <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/user_btn_ask.png" alt=""></image>
+            </view>
+            <view class="item_title">我的问答</view>
+            <view>
+            <image class='backImg' style='width:.6rem;height:.9rem;' src="https://www.huaxinapp.xyz/static/wxss/icon_more.png" alt=""></image>
+            </view>
+        </view>
+
+        <view class="my_act" bindtap="turnToNextPage" data-type='my-integral'>
+            <view>
+            <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/user_btn_score.png" alt=""></image>
+            </view>
+            <view class="item_title my_integral">
+                <text>我的积分</text>
+                <text style="margin-left:10px;color: #3FB1DE;font-size: 1.1rem">{{integral}}</text>
+            </view>
+            <view class='integral_more'>
+                <text style="color: grey;font-size: .8rem;margin-right: 10px">详情</text>
+                <image class='backImg' src="https://www.huaxinapp.xyz/static/wxss/icon_more.png" alt="" style='height: .9rem;width: .6rem'></image>
+            </view>
+        </view>
+    </view>
+
+    <view class="list">
+
+        <view class="my_act" bindtap="turnToNextPage" data-type='certification'>
+            <view>
+            <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/user_btn_certificate.png" alt=""></image>
+            </view>
+            <view class="item_title">学生认证</view>
+            <view>
+            <image class='backImg' style='width:.6rem;height:.9rem;' src="https://www.huaxinapp.xyz/static/wxss/icon_more.png" alt=""></image>
+            </view>
+        </view>
+
+        <view class="my_act" bindtap="turnToNextPage" data-type='suggestion'>
+            <view>
+            <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/user_btn_feedback.png" alt=""></image>
+            </view>
+            <view class="item_title">意见反馈</view>
+            <view>
+            <image class='backImg' style='width:.6rem;height:.9rem;' src="https://www.huaxinapp.xyz/static/wxss/icon_more.png" alt=""></image>
+            </view>
+        </view>
+
+    </view>
+
+    <view style="text-align: center;padding: 1rem">
+        <button type="button" style="" class="regular-btn" bindtap="pop">退出登录</button>
+    </view>
+
+    <!-- footer -->
+    <view class="menu">
+        <view class="home " bindtap="turnToNextPage_redirect" data-type='index'>
+        <image src="https://www.huaxinapp.xyz/static/wxss/tab_icon_home_default.png"></image> <text>首页</text>
+        </view>
+            
+        <view class="module " bindtap="turnToNextPage_redirect" data-type='find'>
+        <image src="https://www.huaxinapp.xyz/static/wxss/tab_icon_discover_default.png"></image> <text>发现</text>
+        </view>
+            
+        <view class="mine active" bindtap="turnToNextPage_redirect" data-type='mine'>
+        <image src="https://www.huaxinapp.xyz/static/wxss/tab_icon_user_selected.png"></image> <text>我的</text>
+        </view>
+                
+        <view class="cf"></view>
+    </view>
+    
+    <view wx:if='{{isBomb == true}}'>
+        <!-- 弹框底层蒙版 -->
+        <view class="mask-ui" bindtap='mask_cancle'></view>
+        <!-- 弹框-->
+        <view id="bomb-box1" class="bomb-box">
+            <view class="box_hint">确定退出登录么？</view>
+            <view class="box_btn">
+                <button style="background:#5ed8b6 " class="box_affirm" bindtap="popConfirm">确定</button>
+                <button style="background:grey " class="box_cancle" bindtap='popCancle'>取消</button>
+            </view>
+        </view>  
+    </view>
+      
+</view>

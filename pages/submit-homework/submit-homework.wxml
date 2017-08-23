@@ -1,0 +1,85 @@
+<view class="container">
+
+    <view class="main" style="background: #42B8DB">
+      <view class="back"  bindtap='backToAc' >
+        <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_back.png" alt="" style="width: .5rem;"></image>
+      </view>
+      <view class="title">提交作业</view>
+    </view>
+    
+    <view class="content" style='background: #EAEAEA'>
+        <view class="content_title">
+            <view wx:if='{{homeworkType == 2 || homeworkType == 3}}'>心探索卡</view>
+            <view wx:else>心学习卡</view>
+        </view>
+
+        <view class="content_items">
+            <view class="content_item">
+                <view class="item_title" wx:if='{{homeworkType == 2 || homeworkType == 3}}'>我的“心”发现是</view>
+                <view class="item_title" wx:else>四个内容</view>
+                <view>
+                    <textarea bindconfirm='content_confirm1' bindblur='contentEvent1' class="textarea" name="" id="" cols="20" rows="5" style="background: #fff" focus='{{focus1}}'></textarea>
+                    <!-- <input type="text" class="ip" /> -->
+                </view>
+            </view>
+
+            <view class="content_item">
+                <view class="item_title" wx:if='{{homeworkType == 2 || homeworkType == 3}}'>我更确定的是</view>
+                <view class="item_title" wx:else>三个感悟</view>
+                <view>
+                    <textarea bindconfirm='content_confirm2' bindblur='contentEvent2' class="textarea" name="" id="" cols="20" rows="5" style="background: #fff" focus='{{focus2}}'></textarea>
+                </view>
+            </view>
+
+            <view class="content_item">
+                <view class="item_title" wx:if='{{homeworkType == 2 || homeworkType == 3}}'>我还要理解的是</view>
+                <view class="item_title" wx:else>两个改变</view>
+                <view>
+                    <textarea bindconfirm='content_confirm3' bindblur='contentEvent3' class="textarea" name="" id="" cols="20" rows="5" style="background: #fff" focus='{{focus3}}'></textarea>
+                </view>
+            </view>
+
+            <view class="content_item">
+                <view class="item_title" wx:if='{{homeworkType == 2 || homeworkType == 3}}'>对于未来，我想新尝试的是</view>
+                <view class="item_title" wx:else>一个行动目标</view>
+                <view>
+                    <textarea bindconfirm='content_confirm4' bindblur='contentEvent4' class="textarea" name="" id="" cols="20" rows="5" style="background: #fff" focus='{{focus4}}'></textarea>
+                </view>
+            </view>
+
+        </view>
+
+        <view class="regular-btn_box">
+            <button class="regular-btn" bindtap='pop'>写好了</button>
+        </view>
+    </view>
+    
+    <view wx:if='{{isBomb}}'>
+        <!-- 弹框底层蒙版 -->
+        <view class="mask-ui" style='' ></view>
+        <!-- 弹框-->
+        <!-- <view id="bomb-box1" class="bomb-box" style='top:90%' >
+            <view class="box_hint">请确认无误再提交哦</view>
+            <view class="box_btn">
+                <button style="background:#5ed8b6 " class="box_affirm" bindtap="popConfirm">确定</button>
+                <button style="background:grey " class="box_cancle" bindtap="popCancle">取消</button>
+            </view>
+        </view> -->
+        
+        <view wx:if='{{isBomb2}}'>
+            <view id="bomb-box2" class="bomb-box2" style="font-size: .8rem;top:45%">
+                <view style="margin-right:10px;margin-bottom:10px;">
+                    <image src="https://www.huaxinapp.xyz/static/wxss/img_success.png" alt="" class='user-img'></image>
+                </view>
+                <view style='color: #1BACDC'>提交作业成功！</view>
+                <view>请等待审核！</view>
+            </view>
+        </view>
+    </view>
+    <!-- 警告窗口 -->
+    <block wx:if='{{isShowTip}}'>
+      <view class='text-alert'>
+        {{alertText}}
+      </view>
+    </block>
+</view>

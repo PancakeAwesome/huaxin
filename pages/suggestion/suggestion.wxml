@@ -1,0 +1,43 @@
+<view class="container">
+
+        <view class="main" style="">
+            <view class="back"  bindtap='backToPage' >
+              <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_back.png"></image>
+            </view>
+            <view class="title">意见反馈</view>
+        </view>
+        
+        <view style="width: 100%;">
+            <textarea name="suggestion" id="suggestion" class="textarea" cols="" rows="10" bindblur='contentEvent' style="width: 100%;padding:10px;background: #fff" placeholder="你的意见对我们很重要" disabled='{{disabled}}'></textarea>
+        </view>
+
+        <view style="width: 100%;margin:10px auto;background: #fff;display: flex;align-items: center;padding: 20rpx">
+          <text style="font-size: .8rem">联系方式</text>
+          <text style="font-size: .7rem;color: red">*(必填)</text>
+          <input focus="{{focus}}" bindinput='phoneNumberIp' style="height: 30px;flex:1" disabled='{{disabled}}'/>
+        </view>
+
+        <view style='font-size: .7rem;color: red;padding-left:10px'>欢迎加入交流群603334297</view>    
+        <view class="regular-btn_box">
+            <button class="regular-btn" bindtap='pop' disabled="{{disabled}}">提交</button>
+        </view>
+
+        <view wx:if='{{isBomb == true}}'>
+            <!-- 弹框底层蒙版 -->
+            <view class="mask-ui"></view>
+            <!-- 弹框-->
+            <view id="bomb-box1" class="bomb-box">
+                <view class="box_hint">确定提交么？</view>
+                <view class="box_btn">
+                    <button style="background:#5ed8b6 " class="box_affirm" bindtap="popConfirm">确定</button>
+                    <button style="background:grey " class="box_cancle" bindtap='popCancle'>取消</button>
+                </view>
+            </view>  
+        </view>
+        <!-- 警告窗口 -->
+    <block wx:if='{{isShowTip}}'>
+      <view class='text-alert'>
+        {{alertText}}
+      </view>
+    </block>   
+  </view>

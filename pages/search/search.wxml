@@ -1,0 +1,125 @@
+<view class="container" wx:if='{{isShow}}'>
+
+    <view class="search_title" style="background: #fff">
+        <view class="search_box">
+            <view>
+              <image src="https://www.huaxinapp.xyz/static/wxss/icon_search2.png" class="search" bindtap=''></image>
+            </view> 
+
+            <input  focus="{{focus}}" confirm-type='search' bindconfirm='searchIp' placeholder="搜索问答、活动" style="font-size:.8rem;margin-left:20rpx;color: #646464;flex:1" value="{{scByHs}}" />
+
+            <view>
+              <image src="https://www.huaxinapp.xyz/static/wxss/icon_cancle.jpg" class="search" bindtap='inputCancel'></image>
+            </view> 
+        </view>
+        <view style="margin-left: 10px;font-size: .7rem;color: #909090" bindtap='backToPage' data-type=''>取消</view>
+    </view>
+    
+    <view class="content">
+        <view class="tabbar" style='font-size: 1rem;border-top:1px #F2F2F2 solid;border-bottom:1px #F2F2F2 solid;'>
+            <view class="section selected active" data-type='0' bindtap='switchTab' wx:if='{{acTypeShow == 0}}'>活动</view>
+            <view class="section  " data-type='0' bindtap='switchTab' wx:else>活动</view>
+
+            <view class="section active selected" data-type='1' bindtap='switchTab' wx:if='{{acTypeShow == 1}}'>问答</view>
+            <view class="section " data-type='1' bindtap='switchTab' wx:else>问答</view>
+
+        </view>
+        
+        <view class="search_history" wx:if='{{isHsShow}}'>
+            <text>搜索历史：</text>
+
+            <block wx:for='{{scHs}}'>
+              <view class="search_key" bindtap='scHsEvent' data-type='{{item}}'>{{item}}</view>
+            </block>
+        </view>
+
+        <view class="search_results">
+
+          <view wx:if='{{acShow}}'>
+            <block wx:for='{{acs}}' >
+              <view class="search_result" data-type='{{item.uuid}}' bindtap='turnToAc'>
+                  <view>
+                      <view>{{item.name}}</view>
+                      <view class="result_time">{{item.startTimeFm}}</view>
+                  </view>
+                  <view style='display: flex;align-items: center;'>
+                    <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_label.png" alt="" style='width:34.3rpx;height:34.3rpx'></image>
+                    <text style='font-size: .7rem'>{{item.acTypeCn}}</text>
+                  </view>
+              </view>
+            </block>
+          </view>
+
+          <view class='default-img' wx:if='{{isAcDfShow}}'>
+            <text>已经全部加载完毕</text>
+          </view>
+          
+          <view wx:if='{{quShow}}'>
+            <block wx:for="{{qus}}" >
+            <!-- 获得问题 -->
+              <view class='item' >
+                <view class="title_top">
+                    <view class="tag">
+                      <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_label.png" style="width:1rem;height:1rem;margin-right:10rpx;" ></image>
+                    </view>
+                    <view class="tag_text" wx:if='{{item.quType == 1}}'>人际交往</view>
+                    <view class="tag_text" wx:elif='{{item.quType == 2}}'>个人成长</view>
+                    <view class="tag_text" wx:elif='{{item.quType == 3}}'>恋爱情感</view>
+                    <view class="tag_text" wx:elif='{{item.quType == 4}}'>家庭关系</view>
+                    <view class="tag_text" wx:elif='{{item.quType == 5}}'>情绪压力</view>
+                    <view class="tag_text" wx:elif='{{item.quType == 6}}'>职业规划</view>
+                    <view class="tag_text" wx:elif='{{item.quType == 7}}'>性心理</view>
+                    <view class="tag_text" wx:else>其他</view>
+                </view>
+
+                <view id='{{item.quId}}' class="itme_first section"  bindtap='turnToQu'>
+                    <text class="text">{{item.quContent}}</text>
+
+                </view>
+
+                <view class="item_fourth section content_hint_voice" style='' >
+                  <view>
+                    <image src='https://www.huaxinapp.xyz/static/wxss/post-big1_08.jpg' class='user-img' bindtap='liking' wx:if='{{!item.voted}}' data-type='{{item.quId}}' data-status='{{index}}' style='width: 40rpx;height: 40rpx'></image>
+                    <image src='https://www.huaxinapp.xyz/static/wxss/icon_like.png' class='user-img' bindtap='unLiking' data-type='{{item.quId}}' data-status='{{index}}' style='width: 40rpx;height: 40rpx' wx:else></image>
+                  </view>
+                  <text>{{item.quVoteNum}}人有同感</text>
+                </view>
+
+                <view class="item_third section content_hint_voice" style='padding:30rpx .3rem .3rem .3rem;' wx:if='{{item.anVoice != null && item.anVoice != ""}}'>
+                  <view class='anuser_box'>
+                    <view>
+                      <image class='user-img' src="{{item.anUserPic}}" class="headImg" style="" wx:if='{{item.anUserPic != null}}'></image>
+                      <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/img_unknown user.png" class="headImg" style="" wx:else></image>
+                    </view>
+                    <view >
+                      <text wx:if='{{item.anUserNickname != null && item.anUserNickname != ""}}'>{{item.anUserNickname}}</text>
+                      <text wx:else>匿名用户</text>
+                    </view>
+                  </view>
+                  
+                  <view class="voice-box-rp voice-box voicearr-104" bindtap='voiceEvent' data-type='{{item.anVoice}}' data-anvoice='{{index}}' data-anid='{{item.anId}}'>                
+                      <view class="voice-box-pause"></view>
+                      <view class='voice_duration'>{{item.anVoiceDurationFm}}</view>                               
+                  </view>
+                  <view class="rp-voice-time rel" style="font-size: .6rem;margin-left: 1rem">{{item.anVoiceListened}}人听过</view>
+                  <view class="cf"></view>
+                </view>
+                
+                <text class=" text" wx:if='{{item.anContent != null && item.anContent != ""}}' style='color:#7B7B7B;font-size:.7rem;padding:0 .3rem;border-top:1px #F7F7F7 solid;'>{{item.anContent}}</text>
+              </view>
+            </block>
+          </view>
+            
+          <view class='default-img' wx:if='{{isQuDfShow}}'>
+            <text>已经全部加载完毕</text>
+          </view>
+        </view>
+    </view>
+
+    <!-- 警告窗口 -->
+    <block wx:if='{{isShowTip}}'>
+      <view class='text-alert'>
+        {{alertText}}
+      </view>
+    </block>    
+</view>

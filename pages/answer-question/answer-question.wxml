@@ -1,0 +1,75 @@
+<view class="container" wx:if='isShow'>
+    <view class="main" style="">
+        <view class="back"  bindtap='backToPage'>
+          <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_back.png" alt="" style=""></image>
+        </view>
+        <view class="title">问题详情</view>
+    </view>
+
+    <view class="content">
+        <view class="user">
+            <view>
+              <image class='user-img' src="{{item.quUserPic}}" class="headImg" style="" wx:if='{{item.quUserPic != null &&item.quUserPic != ""}}'></image>
+              <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/img_unknown user.png" class="headImg" style="" wx:else></image>
+            </view>
+            <text wx:if='{{qu.quUserNickname != null && qu.quUserNickname != ""}}'>{{qu.quUserNickname}}</text>
+            <text style='margin-left: 20rpx;color: #8A8A8A' wx:else>匿名用户</text>
+        </view>
+
+        <view class="question_detail">
+            <view style='color: #949494'>{{qu.quContent}}</view>
+            <view class="question_time" style='color: #BBBBBB;font-size: .7rem;margin-top:30rpx;'>{{quCreatedTimeFn}}前</view>
+        </view>
+
+        <view class="voice_box">
+            <view >
+
+              <view style='display: flex;align-items: center;flex-direction: column;' wx:if='{{isVoiceReStart}}'>
+                <image class='voiceImg' src="https://www.huaxinapp.xyz/static/wxss/icon_start.png" alt="" bindtap='recordStart'></image>
+                <view style='font-size:.7rem;color:#B2B2B2;margin-top:30rpx;'>可以录制最多三分钟的语音</view>
+              </view>
+
+              <view style='display: flex;align-items: center;flex-direction: column;' wx:if='{{isVoiceStart}}'>
+                <text style='color:#43B9DA'>{{recordDuration}}秒</text>
+                <image class='voiceImg' src="https://www.huaxinapp.xyz/static/wxss/icon_stop.png" alt="" bindtap='recordStop'></image>
+              </view>
+              
+
+              <view style='display: flex;align-items: center;' wx:if='{{isVoiceStop}}'> 
+                <image class='voiceImg' src="https://www.huaxinapp.xyz/static/wxss/icon_redo.png" alt="" bindtap='recordRestart'></image>
+                <text style='font-size: 1.2rem;margin-left:40rpx'>重录</text>
+              </view>
+              
+            </view>
+            
+        </view>
+
+        <view class="" style="width: 90%;margin:10px auto">
+            <textarea class="textarea" name="answer" id="answer" cols="30" rows="10" placeholder="可添加文字" style="background: #F4F4F4" bindblur='contentEvent'></textarea>
+        </view>
+
+        <view class="regular-btn_box">
+            <button class="regular-btn" bindtap='pop'>提交</button>
+        </view>
+    </view>
+
+    <view wx:if='{{isBomb == true}}'>
+        <!-- 弹框底层蒙版 -->
+        <view class="mask-ui" bindtap='mask_cancle'></view>
+        <!-- 弹框-->
+        <view id="bomb-box1" class="bomb-box">
+            <view class="box_hint">确定提交么？</view>
+            <view class="box_btn">
+                <button style="background:#5ed8b6 " class="box_affirm" bindtap="popConfirm">确定</button>
+                <button style="background:grey " class="box_cancle" bindtap='popCancle'>取消</button>
+            </view>
+        </view>  
+    </view>
+
+    <!-- 警告窗口 -->
+    <block wx:if='{{isShowTip}}'>
+      <view class='text-alert'>
+        {{alertText}}
+      </view>
+    </block>
+</view>

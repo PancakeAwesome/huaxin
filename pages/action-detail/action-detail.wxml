@@ -1,0 +1,149 @@
+<view class="container" wx:if='{{isShow}}'>
+
+    <view class="main" style="">
+        <view class="back"  bindtap='backToPage' data-type='find'>
+          <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_back.png"></image>
+        </view>
+        <view class="title">活动详情</view>
+    </view>
+    
+    <view class="content">
+        <view class="post_pic" style='background: url({{ac.titleGraph}});background-size: cover'>
+            <!-- <image class='' src="{{ac.titleGraph}}" alt="" wx:if='{{ac.titleGraph != null && ac.titleGraph != ""}}'></image>
+            <image class='' src="https://www.huaxinapp.xyz/static/wxss/pic.png" alt="" wx:else></image> -->
+        </view>
+
+        <view class="action_kind">
+            <view style='margin:30rpx 0;font-size: .9rem'>{{acTypeCn}}</view>
+            <view style="font-size: .7rem;color: #606060;">
+                <text>积分{{ac.integral}}分</text>
+                <text>|</text>
+                <text>规模{{ac.limitationCount}}人</text>
+            </view>
+        </view>
+
+        <view class="action_title">{{ac.name}}</view>
+
+        <view class="action_time_loc">
+            <view>
+                <view class='action_time'>
+                    <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_date.png" alt="" style=''></image>
+                </view>
+                <view style="display: block;margin-left:10rpx">
+                    <view>{{startTimeFm}}</view>
+                    <view>{{endTimeFm}}</view>
+                </view>
+            </view>
+            <view>
+                <view class='action_location'>
+                    <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_location.png" alt="" style=''></image>
+                </view>
+                <view style='margin-left:10rpx'>{{ac.address}}</view>
+            </view>
+        </view>
+
+        <view class="action_tips" style='width: 80%'>
+            <ul style="list-style-type: disc;">
+              <block wx:for='{{contentList}}'>
+                <li wx:if='{{item != "" && item != " "}}'>• {{item}}</li>
+              </block>
+            </ul>
+            
+            <view class='action_hint' wx:if='{{needAppointment && !isOutDate && ac.status == -1 && isLogin}}'>
+              <view class='text_hint'>请至少提前一天预约</view>
+              <view>
+                <image class="user-img" src="https://www.huaxinapp.xyz/static/wxss/icon_dial.png" bindtap='popDialog' style='width:45rpx;height:45rpx;'></image>
+              </view>
+            </view>
+        </view>
+
+        <view style="" class="regular-btn_box" style='padding:60px 0 30px 0;'>
+            <button type='button' class="" style="width:40%;background: #B7B7B7;color: #fff" wx:if='{{isOutDate}}'>活动过期</button>
+
+            <button type='button' class="" style="width:40%;background: #B7B7B7;color: #fff" wx:if='{{!isOutDate && ac.status == 3}}'>已完成</button>
+            <!-- <view class='integral_rotate'>获得{{ac.integral}}积分</view> -->
+
+            <button type='button' class="" style="width:40%;background: #B7B7B7;color: #fff" wx:if='{{!isOutDate && ac.status == 1}}'>待审核</button>
+
+           <button type='button' class="regular-btn" disabled="{{disabled}}" bindtap='toSign' wx:if='{{!isOutDate && !ac.checkin && ac.status == 0}}' style="width:40%;display:flex;justify-content:center;align-items:center;">
+            <text style='margin-right: 20rpx'>去签到</text>
+            <image src='https://www.huaxinapp.xyz/static/wxss/icon_scan.png' class='user-img' style='height: 40rpx;width: 40rpx'></image>
+           </button>
+
+            <button type='button' class="regular-btn" disabled="{{disabled}}" bindtap='submitHw' style="width:40%;" wx:if='{{!isOutDate && ac.checkin && ac.status == 0}}'>交作业</button>
+
+            <button type='button' class="regular-btn" disabled="{{disabled}}" bindtap='apply' style="width:40%;" wx:if='{{!isOutDate && ac.status == -1}}'>立即报名</button>
+
+            <button type='button' class="regular-btn" disabled="{{disabled}}" bindtap='submitHw' style="width:60%;" wx:if='{{!isOutDate && ac.status == 2}}'>未通过，请重新提交</button>
+
+        </view>
+
+        <view wx:if='{{isBomb}}'>
+            <!-- 弹框底层蒙版 -->
+            <view class="mask-ui" disabled="{{disabled}}" bindtap='mask_cancle'></view>
+
+            <view wx:if='{{isBomb3}}'>
+              <!-- 弹框1-->
+              <view class='submit-bomb' style='padding: 0'>
+                  <view disabled="{{disabled}}" bindtap='subHomeFromText'>直接填写作业</view>
+                  <view disabled="{{disabled}}" bindtap='subHomeFromImg'>从手机相册选择</view>
+                  <view disabled="{{disabled}}" bindtap='popCancle'>取消</view>
+              </view>
+
+              <!-- 弹框2-->
+              <view class='submit-bomb2' wx:if='{{isBomb2}}' style='padding: 0'>
+                  <view disabled="{{disabled}}" bindtap='subFromDis'>心探索</view>
+                  <view disabled="{{disabled}}" bindtap='subFromStudy'>心学习</view>
+                  <view disabled="{{disabled}}" bindtap='popCancle2'>取消</view>
+              </view>
+              
+            </view>
+            
+            <!-- 弹框5-->
+            <view class='submit-bomb' wx:if='{{isBomb5 && !isOutDate && ac.status == -1}}' style='padding:0'>
+              <block wx:for='{{acPhNu}}'>
+                <view bindtap='callPhEv' data-type='{{item}}' style='color: #42B8DB'>{{item}}</view>
+              </block>
+              <view bindtap='popCancle' data-type='{{item}}' style=''>取消</view>
+            </view>
+
+            <!-- 弹框3-->
+            <view wx:if='{{isPop3}}'>
+              <view id="bomb-box2" class="bomb-box" style="font-size: .8rem;">
+                  <view style="padding: 20px">
+                      <image src="https://www.huaxinapp.xyz/static/wxss/img_success.png" alt="" class='user-img'></image>
+                  </view>
+                  <!-- <view style='color: #1BACDC'></view> -->
+                  <input type="text" disabled='false' value="恭喜报名成功！" style="color: #1BACDC" focus='{{applyFc}}'/>
+                  <view>请于<text style='color: #1BACDC'>{{startTimeFm}}</text>准时参加活动互动现场别忘了签到哦！</view>
+              </view>
+            </view>
+
+            <!-- 弹框6-->
+            <view wx:if='{{isBomb6}}'>
+              <view id="bomb-box2" class="bomb-box2" style="font-size: .8rem;">
+                  <view style="padding: 20px">
+                      <image src="https://www.huaxinapp.xyz/static/wxss/img_success.png" alt="" class='user-img'></image>
+                  </view>
+                  <view >签到成功！</view>
+              </view>
+            </view>
+
+            <!-- 弹框4-->
+            <view wx:if='{{isBomb4}}'>
+              <view id="bomb-box2" class="bomb-box" style="font-size: .8rem;">
+                  <view style='margin:30px auto;'>提交学生认证才可以报名哦</view>
+                  <button type='button' class="regular-btn" bindtap='turnToCf' style="width: 60%;margin:30px auto;">去提交</button>
+              </view>
+            </view>
+
+        </view>
+    </view>
+    
+    <!-- 警告窗口 -->
+    <block wx:if='{{isShowTip}}'>
+      <view class='text-alert'>
+        {{alertText}}
+      </view>
+    </block>
+</view>

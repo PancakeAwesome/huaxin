@@ -1,0 +1,9 @@
+@import '../search/search.wxss';
+@import '../index/index.wxss';
+
+.content_tab{
+    border-bottom: 1px grey solid;
+}
+.content_tab > .tab_active{
+    border-bottom: 1px solid blue;
+}

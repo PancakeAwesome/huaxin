@@ -1,0 +1,82 @@
+<view class="container">
+    <view class="main" style="">
+        <view class="back" bindtap='backToPage'>
+          <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_back.png"></image>
+        </view>
+        <view class="title">提问</view>
+    </view>
+
+    <form action="">
+        <view id="content">
+            <view class="content_wrap" style="background: #fff;margin-top: 10px">
+                <view style="font-size: 1rem;padding: 10px" class="question_kind">
+                  <!-- <view class='options'>
+                      <view bindtap='switch' data-type='0' wx:if='{{acTypeShow == 10}}'>人际交往</view>
+                      <view bindtap='switch' data-type='0' wx:if='{{acTypeShow == 0}}'>人际交往</view>
+                      <view bindtap='switch' data-type='1' wx:if='{{acTypeShow == 1}}'>个人成长</view>
+                      <view bindtap='switch' data-type='2' wx:if='{{acTypeShow == 2}}'>恋爱情感</view>
+                      <view bindtap='switch' data-type='3' wx:if='{{acTypeShow == 3}}'>家庭关系</view>
+                      <view bindtap='switch' data-type='4' wx:if='{{acTypeShow == 4}}'>情绪压力</view>
+                      <view bindtap='switch' data-type='5' wx:if='{{acTypeShow == 5}}'>职业规划</view>
+                      <view bindtap='switch' data-type='6' wx:if='{{acTypeShow == 6}}'>性心理</view>
+                      <view bindtap='switch' data-type='7' wx:if='{{acTypeShow == 7}}'>其他</view>
+                  </view> -->
+                  <view class="section">
+                    <!-- <view class="section__title">当前选择：</view> -->
+                    <picker mode="selector" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                      <view class="picker">
+                        请选择问题类别<text style='border:1px #E0E0E0 solid;padding:5px 30px;margin-left:15px;'>{{array[index]}}</text>
+                      </view>
+                    </picker>
+                  </view> 
+                </view>
+
+                <view style="" class="question_detail">
+                  <textarea name="question" id="question" cols="" rows="10" style="width: 100%;font-size: .9rem;height: 500rpx" bindblur='contentEvent' bindinput='textInput' placeholder="请描述你想提问的心理相关的问题，包括背景信息、前因后果和具体问题，以便老师解决你的困惑（不少于40字）" maxlength="300" placeholder-class='question'></textarea>
+                </view>
+                <view class='text_number'><text>{{text_number}}</text>/300</view>
+            </view>
+            
+            <view class="slide" style="padding: 0 1rem;font-size: .8rem;margin-top: 10px">
+                <!-- <view class="slide_box">
+                    <view class="white"></view>
+                </view> -->
+                <view class="body-view">
+                    <switch checked bindchange="switch1Change"/>
+                </view>
+                <view class="slide_hint">匿名</view>
+            </view>
+
+            
+            <button type='primary' style="" class="regular-btn" bindtap="pop">写好了</button>
+
+        </view>
+        
+        <view wx:if='{{isBomb == true}}'>
+            <!-- 弹框底层蒙版 -->
+            <view class="mask-ui" style=''></view>
+            <!-- 弹框-->
+            <!-- <view id="bomb-box1" class="bomb-box" style=''>
+                <view class="box_hint">请确认无误再提交哦</view>
+                <view class="box_btn">
+                    <button style="background:#5ed8b6 " class="box_affirm" bindtap="popConfirm">确定</button>
+                    <button style="background:grey " class="box_cancle" bindtap="popCancle">取消</button>
+                </view>
+            </view> -->
+            
+            <view wx:if='{{isBomb2 == true}}'>
+                <view id="bomb-box2" class="bomb-box" style="font-size: .8rem;">
+                    <view style="padding: 10px">
+                        <image src="https://www.huaxinapp.xyz/static/wxss/img_success.png" alt="" class='user-img'></image>
+                    </view>
+                    <view style='font-size: 1rem'>提交成功</view>
+                    <text>可在<text style='color: #1BACDC'>我的-我的问答</text>中查看</text>
+                    <text>点赞数多的问题得到老师解答几率更高哦</text>
+                </view>
+            </view>
+            
+        </view>
+        
+    </form>
+
+</view>

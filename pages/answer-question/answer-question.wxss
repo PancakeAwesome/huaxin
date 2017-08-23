@@ -1,0 +1,28 @@
+@import "../../lib/css/public.wxss";
+.user{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+.user image{
+    width: 1.5rem;
+    height: 1.5rem;
+    /*color: #424242;*/
+}
+.question_detail{
+    padding: 10px;
+    font-size: .8rem;
+    border-bottom: 1px #FCFCFD solid;
+    color: #424242;
+}
+.voice_box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+.voiceImg{
+  width: 6rem;
+  height: 6rem;
+}

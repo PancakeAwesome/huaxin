@@ -1,0 +1,84 @@
+<view class="container">
+
+    <view class="main" style="">
+        <view class="back"  bindtap='backToPage' >
+          <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_back.png"></image>
+        </view>
+        <view class="title">认证</view>
+    </view>
+
+    <view class="content">
+        <view class="first section" style='margin-top: 0px;flex-direction:row;justify-content:flex-start;'>
+            <view>
+                <span>学院</span>
+                <span style="color:red">*</span>
+            </view>
+            <view>
+                <picker mode="selector" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                  <view class="picker">
+                    <text style='border: 1px #E9E9E9 solid;margin-left: 50rpx;padding:20rpx;min-width: 45px'>{{array[index]}}</text>
+                  </view>
+                </picker>
+            </view>
+        </view>
+
+        <view class="second section">
+          <view class='section_child'>
+            <view>
+                <span>学号</span>
+                <span style="color:red">*</span>
+            </view>
+            <input style="" focus="{{focus}}" bindinput='studentIdIp' type="number" value='{{studentId}}'/>
+          </view>
+          <view class='ip_tip' wx:if='{{}}'>学号格式有误</view>
+        </view>
+
+        <view class="third section">
+          <view class='section_child'>
+            <view>
+                <span>姓名</span>
+                <span style="color:red">*</span>
+            </view>
+            <input style="" focus="{{focus}}" bindinput='userNameIp' type="text" value='{{userName}}'/>
+          </view>
+            
+          <view class='ip_tip' wx:if='{{nameIsFalse}}'>姓名格式有误</view>
+        </view>
+
+        <view class="fourth section">
+          <view class='section_child'>
+            <view>
+                <span>电话</span>
+                <span style="color:red">*</span>
+            </view>
+            <input style="" focus="{{focus}}" bindinput='phoneNumberIp' type="number" value='{{phoneNumber}}'/>
+          </view>
+          <view class='ip_tip' wx:if='{{pnIsFalse}}'>电话格式有误</view>
+        </view>
+
+    </view>
+
+    <view class="regular-btn_box">
+        <button class="regular-btn" bindtap='pop'>提交</button>
+    </view>
+
+    <view wx:if='{{isBomb == true}}'>
+        <!-- 弹框底层蒙版 -->
+        <view class="mask-ui" bindtap='mask_cancle'></view>
+        <!-- 弹框-->
+        <view id="bomb-box1" class="bomb-box">
+            <view class="box_hint">确定提交认证么？</view>
+            <view class="box_btn">
+                <button class="box_affirm" style="border-radius: 0;background:#43B9DA " bindtap='cfEvent'>确定</button>
+                <button style="border-radius: 0;background: #B7B7B7" class="box_cancle" bindtap='popCancle'>取消</button>
+            </view>
+        </view>  
+    </view>
+
+    <!-- 警告窗口 -->
+    <block wx:if='{{isShowTip}}'>
+      <view class='text-alert'>
+        {{alertText}}
+      </view>
+    </block>
+</view>

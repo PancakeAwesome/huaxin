@@ -1,0 +1,74 @@
+{
+  "pages":[
+    "pages/index/index",
+     
+     "pages/real-act-list/real-act-list",
+     "pages/act-list/act-list",
+     "pages/my-integral/my-integral",
+    "pages/suggestion/suggestion",
+    
+    "pages/certification/certification",
+   
+     "pages/answer-question/answer-question",
+    
+   
+     
+    "pages/find/find",
+    
+    
+    
+    
+    
+    
+
+    
+     "pages/mine/mine",
+     
+    
+    
+    "pages/submit-homework/submit-homework",
+    
+    
+    "pages/ask/ask",
+    
+    
+    
+    
+     "pages/action-detail/action-detail",
+     
+   
+   
+    
+    
+
+    
+    
+    
+   
+    
+    "pages/search/search",
+    "pages/my-act/my-act",
+   
+    "pages/my-question/my-question",
+    
+    
+    
+    
+   
+    
+    "pages/question-detail/question-detail",
+
+    
+    
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "话心",
+    "navigationBarTextStyle":"black",
+    "enablePullDownRefresh":true
+  }
+  
+
+}

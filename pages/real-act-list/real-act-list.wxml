@@ -1,0 +1,128 @@
+<view class="container" style='height: 100%'>
+
+    <view class="main" style="">
+      <view class="back"  bindtap='backToPage'>
+        <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_back.png"></image>
+      </view>
+      <view class="title">线下活动</view>
+    </view>
+    
+    <view class="left_list">
+        <view class="left_kind active"  bindtap='switchTab' data-type='0' wx:if='{{type == 0}}'>
+            <view class='icon'>
+              <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_experience.png" alt=""></image>
+            </view>
+            <view class='left_title'>体验类</view>
+        </view>
+        <view class="left_kind" wx:else  bindtap='switchTab' data-type='0'>
+            <view class='icon'>
+              <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_experience.png" alt=""></image>
+            </view>
+            <view class='left_title'>体验类</view>
+        </view>
+
+        <view class="left_kind active"  bindtap='switchTab' data-type='1' wx:if='{{type == 1}}'>
+            <view class='icon'>
+              <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_activity.png" alt=""></image>
+            </view>
+            <view class='left_title'>活动类</view>
+        </view>
+        <view class="left_kind" wx:else bindtap='switchTab' data-type='1'>
+            <view class='icon'>
+              <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_activity.png" alt=""></image>
+            </view>
+            <view class='left_title'>活动类</view>
+        </view>
+
+        <view class="left_kind active"  bindtap='switchTab' data-type='2' wx:if='{{type == 2}}'>
+            <view class='icon'>
+              <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_salon.png" alt=""></image>
+            </view>
+            <view class='left_title'>沙龙类</view>
+        </view>
+        <view class="left_kind" wx:else bindtap='switchTab' data-type='2'>
+            <view class='icon'>
+              <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_salon.png" alt=""></image>
+            </view>
+            <view class='left_title'>沙龙类</view>
+        </view>
+
+        <view class="left_kind active"  bindtap='switchTab' data-type='3' wx:if='{{type == 3}}'>
+            <view class='icon'>
+              <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_course.png" alt=""></image>
+            </view>
+            <view class='left_title'>课程类</view>
+        </view>
+        <view class="left_kind" wx:else bindtap='switchTab' data-type='3'>
+            <view class='icon'>
+              <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_course.png" alt=""></image>
+            </view>
+            <view class='left_title'>课程类</view>
+        </view>
+
+        <view class="left_kind active"  bindtap='switchTab' data-type='4' wx:if='{{type == 4}}' style='justify-content: flex-start;'>
+            <view class='icon'>
+              <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_recommend.png" alt=""></image>
+            </view>
+            <view class='left_title'>其他</view>
+        </view>
+        <view class="left_kind " wx:else bindtap='switchTab' data-type='4' style='justify-content: flex-start;'>
+            <view class='icon'>
+              <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_recommend.png" alt=""></image>
+            </view>
+            <view class='left_title'>其他</view>
+        </view>
+    </view>
+    
+    <view class='mid_list'>
+      <image src="https://www.huaxinapp.xyz/static/wxss/arrow.png" style='margin-top: 31px' wx:if='{{type == 0}}'></image>
+      <image src="https://www.huaxinapp.xyz/static/wxss/arrow.png" style='margin-top: 111px' wx:if='{{type == 1}}'></image>
+      <image src="https://www.huaxinapp.xyz/static/wxss/arrow.png" style='margin-top: 191px' wx:if='{{type == 2}}'></image>
+      <image src="https://www.huaxinapp.xyz/static/wxss/arrow.png" style='margin-top: 271px' wx:if='{{type == 3}}'></image>
+      <image src="https://www.huaxinapp.xyz/static/wxss/arrow.png" style='margin-top: 361px' wx:if='{{type == 4}}'></image>
+    </view>
+
+    <view class="right_list">
+      <view wx:if='{{type == 4}}'>
+        <view class="right_kind" bindtap='actEvent' data-type='51'>心理测评</view>
+        <view class="right_kind" bindtap='actEvent' data-type='52'>其他</view>
+      </view>
+        
+      <view wx:elif='{{type == 0}}'>
+        <view class="right_kind" bindtap='actEvent' data-type='1'>沙盘疗法体验</view>
+        <view class="right_kind" bindtap='actEvent' data-type='2'>园艺心理体验</view>
+        <view class="right_kind" bindtap='actEvent' data-type='3'>艺术心理体验</view>
+        <view class="right_kind" bindtap='actEvent' data-type='4'>中心回访体验</view>
+        <view class="right_kind" bindtap='actEvent' data-type='5'>脑图像技术体验</view>
+        <view class="right_kind" bindtap='actEvent' data-type='6'>催眠体验</view>
+        <view class="right_kind" bindtap='actEvent' data-type='7'>脑波音乐体验</view>
+        <view class="right_kind" bindtap='actEvent' data-type='8'>减压绘画体验</view>
+        <view class="right_kind" bindtap='actEvent' data-type='9'>放松训练项目</view>
+      </view>
+      
+      <view wx:elif='{{type == 1}}'>
+        <view class="right_kind" bindtap='actEvent' data-type='21'>心微课</view>
+        <view class="right_kind" bindtap='actEvent' data-type='22'>心理学讲座</view>
+        <view class="right_kind" bindtap='actEvent' data-type='23'>心理学课程</view>
+        <view class="right_kind" bindtap='actEvent' data-type='24'>团体心理辅导</view>
+      </view>
+
+      <view wx:elif='{{type == 2}}'>
+        <view class="right_kind" bindtap='actEvent' data-type='32'>大学生心理健康节</view>
+        <view class="right_kind" bindtap='actEvent' data-type='33'>新生心理健康节</view>
+        <view class="right_kind" bindtap='actEvent' data-type='34'>心理辅导站活动</view>
+        <view class="right_kind" bindtap='actEvent' data-type='35'>心理社团活动</view>
+        <view class="right_kind" bindtap='actEvent' data-type='31'>心理志愿服务</view>
+      </view>
+
+      <view wx:if='{{type == 3}}'>
+        <view class="right_kind" bindtap='actEvent' data-type='44'>XY老师的心理沙龙</view>
+        <view class="right_kind" bindtap='actEvent' data-type='41'>沙河心韵</view>
+        <view class="right_kind" bindtap='actEvent' data-type='42'>一心一语</view>
+        <view class="right_kind" bindtap='actEvent' data-type='43'>成长吧</view>
+        <view class="right_kind" bindtap='actEvent' data-type='45'>成长导师面对面</view>
+      </view>
+
+    </view>
+        
+</view>

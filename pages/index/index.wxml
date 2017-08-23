@@ -1,0 +1,135 @@
+<view class="container" wx:if='{{isShow}}'>
+    <view class="logo">
+        <view class='text' style='color: #fff'>话心</view>
+        <view class="search_box" bindtap='turnToNextPage' data-type='search'>
+          <image src="https://www.huaxinapp.xyz/static/wxss/home_icon_search.png" class="search user-img"></image>
+        </view>
+                
+    </view>
+
+    <swiper class='slide-box' indicator-dots="true"
+      autoplay="false" interval="{{interval}}" style="height: {{imgPfHeight}}">
+      <block wx:for="{{imgUrls}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" width="355" height="150" bindtap='imgEve' id='{{index}}' />
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <!-- <input type="text" disabled="true" value="请将下面出现的链接复制通过QQ发给我~" style="background:blue;width:100%;height:100px;position: absolute;z-index: 100;top: 20%;" />
+    <input type="text" value="{{userpic}}" style="background:red;width:100%;height:100px;position: absolute;z-index: 100;top:50%;" /> -->
+
+    <view class='index_tabbar'>
+      <view bindtap="turnToAsk">
+        <image src="https://www.huaxinapp.xyz/static/wxss/btn_question.png" class='user-img' style=""></image>
+        <text>提问</text>
+      </view>
+
+     <!--  <view bindtap="turnToIntegral">
+        <image src="../../images/integral.jpg" class='user-img' style=""></image>
+        <text>我的积分</text>
+      </view> -->
+
+      <view bindtap="erCodeEvent">
+        <image src="https://www.huaxinapp.xyz/static/wxss/btn_sign.png" class='user-img' style=""></image>
+        <text>活动签到</text>
+      </view>
+
+      <view bindtap="turnToNextPage" data-type='find'>
+        <image src="https://www.huaxinapp.xyz/static/wxss/btn_new.png" class='user-img' style=""></image>
+        <text>最新活动</text>
+      </view>
+
+    </view>  
+    
+    <view class='typercontent'>
+      <block wx:for="{{qus}}">
+      <!-- 获得问题 -->
+        <view class='item' >
+          <view class="title_top">
+              <view class="tag">
+                <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/icon_label.png" style="width:1rem;height:1rem;margin-right:10rpx;" ></image>
+              </view>
+              <view class="tag_text" wx:if='{{item.quType == 1}}'>人际交往</view>
+              <view class="tag_text" wx:elif='{{item.quType == 2}}'>个人成长</view>
+              <view class="tag_text" wx:elif='{{item.quType == 3}}'>恋爱情感</view>
+              <view class="tag_text" wx:elif='{{item.quType == 4}}'>家庭关系</view>
+              <view class="tag_text" wx:elif='{{item.quType == 5}}'>情绪压力</view>
+              <view class="tag_text" wx:elif='{{item.quType == 6}}'>职业规划</view>
+              <view class="tag_text" wx:elif='{{item.quType == 7}}'>性心理</view>
+              <view class="tag_text" wx:else>其他</view>
+          </view>
+
+          <view id='{{item.quId}}' class="itme_first section"  bindtap='turnToQu'>
+              <text class="text">{{item.quContent}}</text>
+
+          </view>
+
+          <view class="item_fourth section content_hint_voice" style='' >
+            <view>
+              <image src='https://www.huaxinapp.xyz/static/wxss/post-big1_08.jpg' class='user-img' bindtap='liking' wx:if='{{!item.voted}}' data-type='{{item.quId}}' data-status='{{index}}' style='width: 40rpx;height: 40rpx'></image>
+              <image src='https://www.huaxinapp.xyz/static/wxss/icon_like.png' class='user-img' bindtap='unLiking' data-type='{{item.quId}}' data-status='{{index}}' style='width: 40rpx;height: 40rpx' wx:else></image>
+            </view>
+            <text>{{item.quVoteNum}}人有同感</text>
+          </view>
+
+          <view class="item_third section content_hint_voice" style='padding:30rpx .3rem .3rem .3rem;' wx:if='{{item.anVoice != null && item.anVoice != ""}}' >
+            <view class='anuser_box'>
+              <view>
+                <image class='user-img' src="{{item.anUserPic}}" class="headImg" style="" wx:if='{{item.anUserPic != null}}'></image>
+                <image class='user-img' src="https://www.huaxinapp.xyz/static/wxss/img_unknown user.png" class="headImg" style="" wx:else></image>
+              </view>
+              <view >
+                <text wx:if='{{item.anUserNickname != null && item.anUserNickname != ""}}'>{{item.anUserNickname}}</text>
+                <text wx:else>匿名用户</text>
+              </view>
+            </view>
+            
+            <view class="voice-box-rp voice-box voicearr-104" bindtap='voiceEvent' data-type='{{item.anVoice}}' data-anvoice='{{index}}' data-anid='{{item.anId}}'>                
+                <view class="voice-box-pause"></view>
+                <view class='voice_duration'>{{item.anVoiceDurationFm}}</view>                               
+            </view>
+            <view class="rp-voice-time rel" style="font-size: .6rem;margin-left: 1rem">{{item.anVoiceListened}}人听过</view>
+            <view class="cf"></view>
+          </view>
+          
+          <text class="text" wx:if='{{item.anContent != null && item.anContent != "" && (item.anVoice == null || item.anVoice == "")}}' style='color: #7B7B7B;font-size:.7rem;padding:0 .3rem;border-top:1px #F7F7F7 solid;'>{{item.anContent}}</text>
+        </view>
+      </block>
+
+    </view>
+
+    <!-- footer -->
+    <view class="menu">
+        <view class="home active" bindtap="turnToNextPage_redirect" data-type='index'>
+        <image src="https://www.huaxinapp.xyz/static/wxss/tab_icon_home_selected.png"></image> <text>首页</text>
+        </view>
+            
+        <view class="module" bindtap="turnToNextPage_redirect" data-type='find'>
+        <image src="https://www.huaxinapp.xyz/static/wxss/tab_icon_discover_default.png"></image> <text>发现</text>
+        </view>
+            
+        <view class="mine" bindtap="turnToMine" data-type='mine'>
+        <image src="https://www.huaxinapp.xyz/static/wxss/tab_icon_user_default.png"></image> <text>我的</text>
+        </view>
+                
+        <view class="cf"></view>
+    </view>
+
+    <!-- 弹框3-->
+    <view wx:if='{{isBomb}}'>
+      <view id="bomb-box2" class="bomb-box2" style="font-size: .8rem;">
+          <view style="padding: 20px">
+              <image src="https://www.huaxinapp.xyz/static/wxss/img_success.png" alt="" class='user-img'></image>
+          </view>
+          <view style=''>扫码成功！</view>
+      </view>
+    </view>
+
+    <!-- 警告窗口 -->
+    <block wx:if='{{isShowTip}}'>
+      <view class='text-alert'>
+        {{alertText}}
+      </view>
+    </block>
+</view>
